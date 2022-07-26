@@ -176,10 +176,9 @@ def gen():
 
             while True:
                 try:
-                    session.headers["X-Fingerprint"] = session.get("https://discord.com/api/v9/experiments").json()["fingerprint"]
-                    Fingerprint = session.headers["X-Fingerprint"]
+                    fingerprint = session.get("https://discord.com/api/v9/experiments").json()["fingerprint"]
                     if print_fingerprint == "y":
-                        print(colorama.Fore.GREEN + "[+] Succsesfully Got Fingerprint, " + Fingerprint)
+                        print(colorama.Fore.GREEN + "[+] Succsesfully Got Fingerprint, " + fingerprint)
                     if print_fingerprint == "n":
                         print(colorama.Fore.GREEN + "[+] Succsesfully Got Fingerprint")
                     break
@@ -190,6 +189,7 @@ def gen():
             session.headers = {
                     'Host': 'discord.com', 'Connection': 'keep-alive',
                     'sec-ch-ua': '"Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
+                    'X-Fingerprint': fingerprint,
                     'X-Super-Properties': session.xsup,
                     'Accept-Language': 'en-US', 'sec-ch-ua-mobile': '?0',
                     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.47",
@@ -233,7 +233,7 @@ def gen():
             if print_email == "n":
                 print(colorama.Fore.GREEN + f"[+] Generated Email")
             payload = {
-                "fingerprint": Fingerprint,
+                "fingerprint": fingerprint,
                 "email": f"{email}@gmail.com",
                 "username": f"{usa}",
                 "password": password,
